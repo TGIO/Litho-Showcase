@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="224dp"
+    tools:background="@drawable/bg_blue">
+
+    <ImageView
+        android:id="@+id/team1Logo"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        tools:src="@drawable/juve"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/team2Logo"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        tools:src="@drawable/barsa"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/teamARedCard1"
+        android:layout_width="9dp"
+        android:layout_height="12dp"
+        app:cardCornerRadius="1dp"
+        app:cardBackgroundColor="#ff3b3b"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/teamARedCard2"
+        app:layout_constraintEnd_toStartOf="@+id/score"
+        app:layout_constraintStart_toEndOf="@+id/team1Logo"
+        app:layout_constraintTop_toTopOf="@+id/team1Logo" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/teamARedCard2"
+        android:layout_width="9dp"
+        android:layout_height="12dp"
+        app:cardCornerRadius="1dp"
+        app:cardBackgroundColor="#ff3b3b"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/team1Logo"
+        app:layout_constraintEnd_toStartOf="@+id/score"
+        app:layout_constraintStart_toEndOf="@+id/team1Logo"
+        app:layout_constraintTop_toBottomOf="@+id/teamARedCard1" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/teamBRedCard1"
+        android:layout_width="9dp"
+        android:layout_height="12dp"
+        app:cardCornerRadius="1dp"
+        app:cardBackgroundColor="#ff3b3b"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/teamBRedCard2"
+        app:layout_constraintEnd_toStartOf="@+id/team2Logo"
+        app:layout_constraintStart_toEndOf="@+id/score"
+        app:layout_constraintTop_toTopOf="@+id/team2Logo" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/teamBRedCard2"
+        android:layout_width="9dp"
+        android:layout_height="12dp"
+        app:cardCornerRadius="1dp"
+        app:cardBackgroundColor="#ff3b3b"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/team1Logo"
+        app:layout_constraintEnd_toStartOf="@+id/team2Logo"
+        app:layout_constraintStart_toEndOf="@+id/score"
+        app:layout_constraintTop_toBottomOf="@+id/teamBRedCard1" />
+
+    <TextView
+        android:id="@+id/team1Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/sf_pro_semibold"
+        android:includeFontPadding="false"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/team1Logo"
+        app:layout_constraintStart_toStartOf="@+id/team1Logo"
+        app:layout_constraintTop_toBottomOf="@+id/team1Logo"
+        tools:text="Juventus" />
+
+    <TextView
+        android:id="@+id/team2Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/sf_pro_semibold"
+        android:includeFontPadding="false"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/team2Logo"
+        app:layout_constraintStart_toStartOf="@+id/team2Logo"
+        app:layout_constraintTop_toBottomOf="@+id/team2Logo"
+        tools:text="Barcelona" />
+
+    <TextView
+        android:id="@+id/groupTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="#CCFFFFFF"
+        android:textSize="12sp"
+        android:includeFontPadding="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Group G" />
+
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/champions_bold"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="2sp"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="@+id/team1Logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/team1Logo"
+        tools:text="0 - 2" />
+
+    <TextView
+        android:id="@+id/timing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/sf_pro_semibold"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="6sp"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/score"
+        app:layout_constraintStart_toStartOf="@+id/score"
+        app:layout_constraintTop_toBottomOf="@+id/score"
+        tools:text="(11 - 10p)" />
+
+    <TextView
+        android:id="@+id/teamAscorer1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="15.5dp"
+        android:fontFamily="@font/sf_pro_regular"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="6sp"
+        android:textAlignment="textEnd"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/teamBscorer1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/duration"
+        tools:text="Scorer 1" />
+
+    <TextView
+        android:id="@+id/teamAscorer2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/sf_pro_regular"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="6sp"
+        android:textAlignment="textEnd"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/teamAscorer1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/teamAscorer1"
+        tools:text="Scorer 2" />
+
+    <TextView
+        android:id="@+id/teamBscorer1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15.5dp"
+        android:layout_marginTop="21dp"
+        android:fontFamily="@font/sf_pro_regular"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="6sp"
+        android:textAlignment="textStart"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/teamAscorer1"
+        app:layout_constraintTop_toBottomOf="@+id/duration"
+        tools:text="Scorer 1" />
+
+    <TextView
+        android:id="@+id/teamBscorer2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/sf_pro_regular"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="6sp"
+        android:textAlignment="textStart"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/teamBscorer1"
+        app:layout_constraintTop_toBottomOf="@+id/teamBscorer1"
+        tools:text="Scorer 1" />
+
+    <TextView
+        android:id="@+id/duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/sf_pro_regular"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="6sp"
+        android:textColor="#CCFFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/score"
+        app:layout_constraintStart_toStartOf="@+id/score"
+        app:layout_constraintTop_toBottomOf="@+id/timing"
+        tools:text="Full time" />
+
+    <TextView
+        android:id="@+id/btnWatchHighlights"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_marginTop="18dp"
+        android:background="@color/transparent"
+        android:drawablePadding="4dp"
+        android:layout_marginBottom="18dp"
+        android:fontFamily="@font/sf_pro_semibold"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="Watch Highlights"
+        android:textAllCaps="false"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/teamAscorer2"
+        tools:drawableLeft="@drawable/ic_highlights"
+        tools:textColor="@color/light_greenish_blue" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
