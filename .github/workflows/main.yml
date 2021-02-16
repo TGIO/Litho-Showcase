@@ -19,5 +19,5 @@ jobs:
 #           reporter: github-pr-review # Change reporter
 
       - name: detekt
-        uses: natiginfo/action-detekt-all@1.15.0
+        uses: DominuS-RU/Detekt-Action@v1.16.0-RC1
 
