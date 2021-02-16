@@ -18,7 +18,7 @@ jobs:
           fail_on_error: false
 #           reporter: github-pr-review # Change reporter
 
-      - name: detekt
+      - name: detekt-all
         uses: natiginfo/action-detekt-all@v1.15.0
         with:
           github_token: ${{ secrets.github_token }}
