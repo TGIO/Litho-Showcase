@@ -19,5 +19,8 @@ jobs:
 #           reporter: github-pr-review # Change reporter
 
       - name: detekt
-        uses: DominuS-RU/Detekt-Action@v1.16.0-RC1
+        uses: DominuS-RU/Detekt-Action@v1.15.0
+        with:
+          github_token: ${{ secrets.github_token }}
+          fail_on_error: false
 
