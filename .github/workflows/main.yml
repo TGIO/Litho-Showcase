@@ -25,9 +25,11 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
-      - name: Run ktlint with reviewdog
+      
+      - name: Test
         run: echo "Hello $REVIEWDOG_GITHUB_API_TOKEN $secrets.GITHUB_TOKEN $Last_Name, today is Monday!"
+        
+      - name: Run ktlint with reviewdog
         env:
             REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         uses: ScaCap/action-ktlint@1.3
