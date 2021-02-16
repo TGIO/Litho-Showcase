@@ -17,3 +17,7 @@ jobs:
           android: true
           fail_on_error: true
 #           reporter: github-pr-review # Change reporter
+
+      - name: detekt
+        uses: natiginfo/action-detekt-all@1.16.0-RC1
+
