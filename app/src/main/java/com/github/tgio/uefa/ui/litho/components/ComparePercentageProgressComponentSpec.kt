@@ -41,7 +41,6 @@ object ComparePercentageProgressComponentSpec {
         donutProgressView.gapWidthDegrees = 10F
         donutProgressView.strokeWidth = 3.toDp()
         donutProgressView.gapWidthDegrees = 0F
-//        donutProgressView.animateChanges = false
         donutProgressView.submitData(listOf(section1))
     }
 }
