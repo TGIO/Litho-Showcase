@@ -13,13 +13,5 @@ jobs:
           
       - name: detekt
         run: ./gradlew detekt
-        
-      - name: ktlint
-        uses: ScaCap/action-ktlint@master
-        with:
-          github_token: ${{ secrets.github_token }}
-          android: true
-          fail_on_error: false
-          reporter: github-pr-review # Change reporter
 
 
