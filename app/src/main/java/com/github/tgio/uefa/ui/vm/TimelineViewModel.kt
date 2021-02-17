@@ -27,7 +27,7 @@ class TimelineViewModel(
         if (state.value == null) {
             state.putLoading()
             repository.getMatchInfo(gameId).observeForever {
-                when (it) {
+                when(it) {
                     is StatefulData.Success -> state.putData(MatchInfoScreenModel(it.data))
                     is StatefulData.Error -> state.putError(it.throwable)
                 }
