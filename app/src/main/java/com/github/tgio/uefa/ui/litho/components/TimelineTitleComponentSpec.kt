@@ -2,7 +2,12 @@ package com.github.tgio.uefa.ui.litho.components
 
 import android.graphics.Color
 import androidx.core.content.res.ResourcesCompat
-import com.facebook.litho.*
+import com.facebook.litho.ClickEvent
+import com.facebook.litho.Column
+import com.facebook.litho.Component
+import com.facebook.litho.ComponentContext
+import com.facebook.litho.EventHandler
+import com.facebook.litho.Row
 import com.facebook.litho.annotations.LayoutSpec
 import com.facebook.litho.annotations.OnCreateLayout
 import com.facebook.litho.annotations.Prop
@@ -16,6 +21,7 @@ import com.github.tgio.uefa.ui.litho.LithoStyle
 
 @LayoutSpec
 object TimelineTitleComponentSpec {
+    @Suppress("MagicNumber")
     @OnCreateLayout
     fun onCreateLayout(
         c: ComponentContext,
@@ -28,7 +34,7 @@ object TimelineTitleComponentSpec {
             .child(
                 Row.create(c)
                     .heightDip(56F)
-                    .backgroundColor(c.getColor(style.color_item_background))
+                    .backgroundColor(c.getColor(style.colorItemBackground))
                     .child(
                         Text.create(c)
                             .text(title)

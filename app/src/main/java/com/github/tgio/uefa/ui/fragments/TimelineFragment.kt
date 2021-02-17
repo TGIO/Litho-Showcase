@@ -21,6 +21,7 @@ import com.github.tgio.uefa.ui.models.MatchInfoScreenModel
 import com.github.tgio.uefa.ui.vm.TimelineViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
+@Suppress("MagicNumber")
 class TimelineFragment : BaseFragment<MatchInfoScreenModel>() {
     private lateinit var lithoView: LithoView
     private lateinit var c: ComponentContext
@@ -80,7 +81,7 @@ class TimelineFragment : BaseFragment<MatchInfoScreenModel>() {
                 .heightDip(48F)
                 .marginDip(YogaEdge.TOP, 130F)
                 .alignSelf(YogaAlign.CENTER)
-                .colorRes(getStyle().color_highlight)
+                .colorRes(getStyle().colorHighlight)
                 .build()
         )
     }

@@ -7,6 +7,6 @@ import kotlinx.coroutines.CoroutineDispatcher
 class MatchRepository(
     private val dataSource: IDataSource,
     dispatcher: CoroutineDispatcher
-): Repository(dispatcher) {
+) : Repository(dispatcher) {
     fun getMatchInfo(gameId: Int) = getData { dataSource.getMatchInfo(gameId) }
 }

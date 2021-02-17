@@ -34,6 +34,7 @@ class TimelineViewModelTest {
     private val mockDataSource = MockDataSource()
 
     private val testDatasource = object: IDataSource {
+        @Suppress("TooGenericExceptionThrown")
         override suspend fun getMatchInfo(gameId: Int): MatchInfo = withContext(testDispatecher) {
             when(gameId) {
                 0 -> throw Exception("Match not found!")
@@ -50,7 +51,7 @@ class TimelineViewModelTest {
         Assert.assertTrue(vm.state.value == null)
         vm.getMatchInfo(777)
         Assert.assertTrue(vm.state.value is StatefulData.Success)
-        Assert.assertEquals("Bayern", (vm.state.value as StatefulData.Success).data.matchInfo.team_a.name)
+        Assert.assertEquals("Bayern", (vm.state.value as StatefulData.Success).data.matchInfo.teamA.name)
     }
 
     @Test

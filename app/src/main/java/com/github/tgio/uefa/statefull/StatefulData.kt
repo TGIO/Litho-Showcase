@@ -3,7 +3,7 @@ package com.github.tgio.uefa.statefull
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 
-abstract class StatefulData<T> {
+open class StatefulData<T> {
     class Success<T>(val data: T) : StatefulData<T>() {
         override fun toString(): String {
             return "Success(data=$data)"

@@ -20,6 +20,7 @@ import com.github.tgio.uefa.ui.litho.LithoStyle
 
 @LayoutSpec
 object TimelineComparisonPercentageComponentSpec {
+    @Suppress("MagicNumber", "LongMethod")
     @OnCreateLayout
     fun onCreateLayout(
         c: ComponentContext,
@@ -28,7 +29,7 @@ object TimelineComparisonPercentageComponentSpec {
     ): Component {
         return Column.create(c)
             .heightDip(144F)
-            .backgroundColor(c.getColor(style.color_item_background))
+            .backgroundColor(c.getColor(style.colorItemBackground))
             .child(
                 Text.create(c)
                     .text(model.title)
@@ -97,7 +98,7 @@ object TimelineComparisonPercentageComponentSpec {
                             .heightDip(135F)
                             .widthDip(144F)
                             .alignSelf(YogaAlign.CENTER)
-                            .colorRes(style.color_team_a)
+                            .colorRes(style.colorTeamA)
                             .isLeft(true)
                             .marginDip(YogaEdge.RIGHT, 2.75F)
                             .positionType(YogaPositionType.ABSOLUTE)
@@ -107,13 +108,12 @@ object TimelineComparisonPercentageComponentSpec {
                             .heightDip(135F)
                             .widthDip(144F)
                             .alignSelf(YogaAlign.CENTER)
-                            .colorRes(style.color_team_b)
+                            .colorRes(style.colorTeamB)
                             .isLeft(false)
                             .marginDip(YogaEdge.START, 5.5F)
                             .positionType(YogaPositionType.ABSOLUTE)
                     )
             )
             .build()
-
     }
 }

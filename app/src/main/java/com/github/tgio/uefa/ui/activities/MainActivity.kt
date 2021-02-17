@@ -28,14 +28,16 @@ class MainActivity : AppCompatActivity() {
         private const val STYLE = "style"
 
         fun start(context: Context, game: Int, style: LithoStyle) {
-            context.startActivity(Intent(context, MainActivity::class.java).apply {
-                putExtras(
-                    bundleOf(
-                        GAME to game,
-                        STYLE to style
+            context.startActivity(
+                Intent(context, MainActivity::class.java).apply {
+                    putExtras(
+                        bundleOf(
+                            GAME to game,
+                            STYLE to style
+                        )
                     )
-                )
-            })
+                }
+            )
         }
     }
 
@@ -52,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         vm.state.observe(this) {
-            when(it) {
+            when (it) {
                 is StatefulData.Success -> {
                     binding.matchHeaderView.setGameData(it.data.matchInfo)
                 }
@@ -60,16 +62,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         with(vm.getStyle()) {
-            val colorHighlight = ContextCompat.getColor(this@MainActivity, color_highlight)
-            findViewById<ImageView>(R.id.backdrop).setBackgroundResource(background_top)
-            binding.viewpager.setBackgroundResource(background_bot)
+            val colorHighlight = ContextCompat.getColor(this@MainActivity, colorHighlight)
+            findViewById<ImageView>(R.id.backdrop).setBackgroundResource(backgroundTop)
+            binding.viewpager.setBackgroundResource(backgroundBot)
             binding.tabs.setTabTextColors(Color.WHITE, colorHighlight)
             binding.tabs.setSelectedTabIndicatorColor(colorHighlight)
             binding.matchHeaderView.setStyle(this)
             binding.collapsingToolbar.setContentScrimColor(
                 ContextCompat.getColor(
                     this@MainActivity,
-                    color_background
+                    colorBackground
                 )
             )
         }

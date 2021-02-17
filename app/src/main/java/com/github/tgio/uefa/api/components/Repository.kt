@@ -1,3 +1,5 @@
+@file:Suppress("TooGenericExceptionThrown", "TooGenericExceptionCaught")
+
 package com.github.tgio.uefa.api.components
 
 import androidx.lifecycle.liveData

@@ -18,7 +18,7 @@ val dataModule = module {
     }
     single {
         RealDataSource(
-            //Retrofit service here
+            // Retrofit service here
         )
     }
 }
