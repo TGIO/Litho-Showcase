@@ -20,6 +20,6 @@ jobs:
           github_token: ${{ secrets.github_token }}
           android: true
           fail_on_error: false
-#           reporter: github-pr-review # Change reporter
+          reporter: github-pr-review # Change reporter
 
 
