@@ -39,7 +39,7 @@ class TimelineViewModelTest {
             when(gameId) {
                 0 -> throw Exception("Match not found!")
 
-                
+
                 else -> mockDataSource.getMatchInfo(gameId)
             }
         }
