@@ -10,6 +10,10 @@ jobs:
         uses: actions/checkout@master
         with:
           fetch-depth: 1
+          
+      - name: detekt
+        run: ./gradlew detekt
+        
       - name: ktlint
         uses: ScaCap/action-ktlint@master
         with:
@@ -18,9 +22,4 @@ jobs:
           fail_on_error: false
 #           reporter: github-pr-review # Change reporter
 
-#       - name: detekt-all
-#         uses: natiginfo/action-detekt-all@1.16.0-RC1
-#         with:
-#           github_token: ${{ secrets.github_token }}
-#           fail_on_error: false
 
