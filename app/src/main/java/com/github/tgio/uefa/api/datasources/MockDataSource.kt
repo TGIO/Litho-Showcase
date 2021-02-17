@@ -18,25 +18,29 @@ class MockDataSource : IDataSource {
         }
     }
 
+    private fun teamA() = MatchTeamInfo(
+        logo = R.drawable.juve,
+        name = "Juventus",
+        score = 0,
+        redCards = 0,
+        scorers = emptyArray()
+    )
+
+    private fun teamB() = MatchTeamInfo(
+        logo = R.drawable.barsa,
+        name = "Barcelona",
+        score = 2,
+        redCards = 0,
+        scorers = arrayOf(
+            Scorer("Dembélé", "14’"),
+            Scorer("Messi", "36’+1 (p)"),
+        )
+    )
+
     private fun game1(): MatchInfo {
         return MatchInfo(
-            team_a = MatchTeamInfo(
-                logo = R.drawable.juve,
-                name = "Juventus",
-                score = 0,
-                redCards = 0,
-                scorers = emptyArray()
-            ),
-            team_b = MatchTeamInfo(
-                logo = R.drawable.barsa,
-                name = "Barcelona",
-                score = 2,
-                redCards = 0,
-                scorers = arrayOf(
-                    Scorer("Dembélé", "14’"),
-                    Scorer("Messi", "36’+1 (p)"),
-                )
-            ),
+            teamA = teamA(),
+            teamB = teamB(),
             group = "Group G",
             timing = "",
             duration = "Full time",
@@ -46,14 +50,14 @@ class MockDataSource : IDataSource {
 
     private fun game2(): MatchInfo {
         return MatchInfo(
-            team_a = MatchTeamInfo(
+            teamA = MatchTeamInfo(
                 logo = R.drawable.juve,
                 name = "Juventus",
                 score = 0,
                 redCards = 0,
                 scorers = emptyArray()
             ),
-            team_b = MatchTeamInfo(
+            teamB = MatchTeamInfo(
                 logo = R.drawable.barsa,
                 name = "Barcelona",
                 score = 2,
@@ -72,7 +76,7 @@ class MockDataSource : IDataSource {
 
     private fun game3(): MatchInfo {
         return MatchInfo(
-            team_a = MatchTeamInfo(
+            teamA = MatchTeamInfo(
                 logo = R.drawable.bayern,
                 name = "Bayern",
                 score = 2,
@@ -82,7 +86,7 @@ class MockDataSource : IDataSource {
                     Scorer("Scorer", "67’ (o.g.)"),
                 )
             ),
-            team_b = MatchTeamInfo(
+            teamB = MatchTeamInfo(
                 logo = R.drawable.chelsea,
                 name = "Chelsea",
                 score = 2,
@@ -98,6 +102,7 @@ class MockDataSource : IDataSource {
         )
     }
 
+    @Suppress("LongMethod")
     private fun data(): Map<String, Array<TimelineStat>> {
         return mapOf(
             "Key stats" to arrayOf(

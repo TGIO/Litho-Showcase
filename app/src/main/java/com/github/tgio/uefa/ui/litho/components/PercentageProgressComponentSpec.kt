@@ -4,7 +4,11 @@ import android.content.Context
 import app.futured.donut.DonutProgressView
 import app.futured.donut.DonutSection
 import com.facebook.litho.ComponentContext
-import com.facebook.litho.annotations.*
+import com.facebook.litho.annotations.MountSpec
+import com.facebook.litho.annotations.OnCreateMountContent
+import com.facebook.litho.annotations.OnMount
+import com.facebook.litho.annotations.Prop
+import com.facebook.litho.annotations.ResType
 import com.github.tgio.uefa.misc.toDp
 
 @MountSpec
@@ -15,6 +19,7 @@ object PercentageProgressComponentSpec {
         return DonutProgressView(c)
     }
 
+    @Suppress("MagicNumber")
     @OnMount
     fun onMount(
         c: ComponentContext,

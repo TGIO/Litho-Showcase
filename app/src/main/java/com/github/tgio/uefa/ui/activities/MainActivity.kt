@@ -62,16 +62,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         with(vm.getStyle()) {
-            val colorHighlight = ContextCompat.getColor(this@MainActivity, color_highlight)
-            findViewById<ImageView>(R.id.backdrop).setBackgroundResource(background_top)
-            binding.viewpager.setBackgroundResource(background_bot)
+            val colorHighlight = ContextCompat.getColor(this@MainActivity, colorHighlight)
+            findViewById<ImageView>(R.id.backdrop).setBackgroundResource(backgroundTop)
+            binding.viewpager.setBackgroundResource(backgroundBot)
             binding.tabs.setTabTextColors(Color.WHITE, colorHighlight)
             binding.tabs.setSelectedTabIndicatorColor(colorHighlight)
             binding.matchHeaderView.setStyle(this)
             binding.collapsingToolbar.setContentScrimColor(
                 ContextCompat.getColor(
                     this@MainActivity,
-                    color_background
+                    colorBackground
                 )
             )
         }

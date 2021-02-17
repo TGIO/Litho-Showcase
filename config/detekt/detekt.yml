@@ -16,7 +16,7 @@ config:
 processors:
   active: true
   exclude:
-    - 'DetektProgressListener'
+  # - 'DetektProgressListener'
   # - 'FunctionCountProcessor'
   # - 'PropertyCountProcessor'
   # - 'ClassCountProcessor'
@@ -26,11 +26,11 @@ processors:
 console-reports:
   active: true
   exclude:
-    - 'ProjectStatisticsReport'
-    - 'ComplexityReport'
-    - 'NotificationReport'
+    #  - 'ProjectStatisticsReport'
+    #  - 'ComplexityReport'
+    #  - 'NotificationReport'
     #  - 'FindingsReport'
-    - 'FileBasedFindingsReport'
+    #  - 'FileBasedFindingsReport'
 
 output-reports:
   active: true

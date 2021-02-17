@@ -20,6 +20,7 @@ import com.github.tgio.uefa.ui.litho.LithoStyle
 
 @LayoutSpec
 object TimelinePercentageComponentSpec {
+    @Suppress("MagicNumber", "LongMethod")
     @OnCreateLayout
     fun onCreateLayout(
         c: ComponentContext,
@@ -28,10 +29,10 @@ object TimelinePercentageComponentSpec {
     ): Component {
         return Column.create(c)
             .heightDip(100F)
-            .backgroundColor(c.getColor(style.color_item_background))
+            .backgroundColor(c.getColor(style.colorItemBackground))
             .child(
                 PercentageProgressComponent.create(c)
-                    .colorRes(style.color_team_a)
+                    .colorRes(style.colorTeamA)
                     .widthDip(68F)
                     .heightDip(68F)
                     .positionType(YogaPositionType.ABSOLUTE)
@@ -42,7 +43,7 @@ object TimelinePercentageComponentSpec {
             )
             .child(
                 PercentageProgressComponent.create(c)
-                    .colorRes(style.color_team_b)
+                    .colorRes(style.colorTeamB)
                     .widthDip(68F)
                     .heightDip(68F)
                     .positionType(YogaPositionType.ABSOLUTE)

@@ -26,7 +26,7 @@ class MatchHeaderView @JvmOverloads constructor(
     )
 
     fun setGameData(matchInfo: MatchInfo) {
-        with(matchInfo.team_a) {
+        with(matchInfo.teamA) {
             binding.team1Logo.setImageResource(logo)
             binding.team1Title.text = name
             binding.teamAscorer1.text = scorers.getOrNull(0)?.getColoredSpan() ?: ""
@@ -39,7 +39,7 @@ class MatchHeaderView @JvmOverloads constructor(
                 binding.teamARedCard2.visibility = View.VISIBLE
             }
         }
-        with(matchInfo.team_b) {
+        with(matchInfo.teamB) {
             binding.team2Logo.setImageResource(logo)
             binding.team2Title.text = name
             binding.teamBscorer1.text = scorers.getOrNull(0)?.getColoredSpan() ?: ""
@@ -55,12 +55,12 @@ class MatchHeaderView @JvmOverloads constructor(
         binding.timing.text = matchInfo.timing
         binding.duration.text = matchInfo.duration
         binding.groupTitle.text = matchInfo.group
-        binding.score.text = "${matchInfo.team_a.score} - ${matchInfo.team_b.score}"
+        binding.score.text = "${matchInfo.teamA.score} - ${matchInfo.teamB.score}"
     }
 
     fun setStyle(style: LithoStyle) {
-        binding.btnWatchHighlights.setTextColor(style.color_highlight)
-        val colorHighlight = ContextCompat.getColor(context, style.color_highlight)
+        binding.btnWatchHighlights.setTextColor(style.colorHighlight)
+        val colorHighlight = ContextCompat.getColor(context, style.colorHighlight)
         val unwrappedDrawable = ResourcesCompat.getDrawable(
             resources,
             R.drawable.ic_highlights,

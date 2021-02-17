@@ -23,8 +23,9 @@ import com.facebook.yoga.YogaPositionType
 import com.github.tgio.uefa.R
 import com.github.tgio.uefa.api.models.TimelineStat
 import com.github.tgio.uefa.ui.litho.LithoStyle
-import java.util.*
+import java.util.Arrays
 
+@Suppress("MagicNumber", "LongMethod")
 @LayoutSpec
 object TimelineNormalComponentSpec {
 
@@ -36,7 +37,7 @@ object TimelineNormalComponentSpec {
     ): Component {
         return Column.create(c)
             .heightDip(55F)
-            .backgroundColor(c.getColor(style.color_item_background))
+            .backgroundColor(c.getColor(style.colorItemBackground))
             .child(
                 Text.create(c)
                     .text(model.title)
@@ -89,7 +90,7 @@ object TimelineNormalComponentSpec {
                     .child(
                         Image.create(c)
                             .drawable(
-                                buildRoundedRect(c, c.getColor(style.color_team_a), 3)
+                                buildRoundedRect(c, c.getColor(style.colorTeamA), 3)
                             )
                             .heightDip(2.5F)
                             .widthPercent(50F)
@@ -98,7 +99,7 @@ object TimelineNormalComponentSpec {
                     .child(
                         Image.create(c)
                             .drawable(
-                                buildRoundedRect(c, c.getColor(style.color_team_b), 3)
+                                buildRoundedRect(c, c.getColor(style.colorTeamB), 3)
                             )
                             .heightDip(2.5F)
                             .widthPercent(50F)

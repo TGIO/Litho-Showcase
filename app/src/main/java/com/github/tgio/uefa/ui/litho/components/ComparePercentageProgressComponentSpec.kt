@@ -1,3 +1,5 @@
+@file:Suppress("MagicNumber")
+
 package com.github.tgio.uefa.ui.litho.components
 
 import android.content.Context
@@ -5,7 +7,11 @@ import android.graphics.Color
 import app.futured.donut.DonutProgressView
 import app.futured.donut.DonutSection
 import com.facebook.litho.ComponentContext
-import com.facebook.litho.annotations.*
+import com.facebook.litho.annotations.MountSpec
+import com.facebook.litho.annotations.OnCreateMountContent
+import com.facebook.litho.annotations.OnMount
+import com.facebook.litho.annotations.Prop
+import com.facebook.litho.annotations.ResType
 import com.github.tgio.uefa.misc.toDp
 
 @MountSpec

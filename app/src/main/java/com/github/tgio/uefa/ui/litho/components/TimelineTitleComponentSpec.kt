@@ -21,6 +21,7 @@ import com.github.tgio.uefa.ui.litho.LithoStyle
 
 @LayoutSpec
 object TimelineTitleComponentSpec {
+    @Suppress("MagicNumber")
     @OnCreateLayout
     fun onCreateLayout(
         c: ComponentContext,
@@ -33,7 +34,7 @@ object TimelineTitleComponentSpec {
             .child(
                 Row.create(c)
                     .heightDip(56F)
-                    .backgroundColor(c.getColor(style.color_item_background))
+                    .backgroundColor(c.getColor(style.colorItemBackground))
                     .child(
                         Text.create(c)
                             .text(title)

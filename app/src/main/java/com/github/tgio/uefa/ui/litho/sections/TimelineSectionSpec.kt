@@ -4,7 +4,11 @@ import com.facebook.litho.ClickEvent
 import com.facebook.litho.Column
 import com.facebook.litho.Row
 import com.facebook.litho.StateValue
-import com.facebook.litho.annotations.*
+import com.facebook.litho.annotations.OnCreateInitialState
+import com.facebook.litho.annotations.OnEvent
+import com.facebook.litho.annotations.OnUpdateState
+import com.facebook.litho.annotations.Prop
+import com.facebook.litho.annotations.State
 import com.facebook.litho.sections.Children
 import com.facebook.litho.sections.SectionContext
 import com.facebook.litho.sections.annotations.GroupSectionSpec
@@ -16,6 +20,7 @@ import com.github.tgio.uefa.ui.litho.components.TimelineTitleComponent
 
 @GroupSectionSpec
 object TimelineSectionSpec {
+    @Suppress("MagicNumber")
     @OnCreateChildren
     fun onCreateChildren(
         s: SectionContext,
@@ -53,7 +58,7 @@ object TimelineSectionSpec {
                             .child(
                                 Row.create(s)
                                     .heightDip(16F)
-                                    .backgroundColor(s.getColor(style.color_item_background))
+                                    .backgroundColor(s.getColor(style.colorItemBackground))
                             )
                             .child(
                                 Row.create(s)
