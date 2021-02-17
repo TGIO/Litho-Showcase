@@ -31,7 +31,7 @@ object ComparePercentageProgressComponentSpec {
 
         donutProgressView.bgLineColor = Color.TRANSPARENT
         donutProgressView.cap = 2F
-        donutProgressView.gapAngleDegrees = if(isLeft) 90F else 270F
+        donutProgressView.gapAngleDegrees = if (isLeft) 90F else 270F
         donutProgressView.gapWidthDegrees = 10F
         donutProgressView.strokeWidth = 3.toDp()
         donutProgressView.gapWidthDegrees = 0F

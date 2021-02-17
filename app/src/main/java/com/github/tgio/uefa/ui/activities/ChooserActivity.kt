@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.github.tgio.uefa.databinding.ActivityChooserBinding
 import com.github.tgio.uefa.ui.litho.StyleUEFA
 
-class ChooserActivity: AppCompatActivity() {
+class ChooserActivity : AppCompatActivity() {
     private lateinit var binding: ActivityChooserBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

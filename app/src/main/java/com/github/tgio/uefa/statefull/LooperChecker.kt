@@ -2,7 +2,7 @@ package com.github.tgio.uefa.statefull
 
 import android.os.Looper
 
-object LooperChecker: IThreadChecker {
+object LooperChecker : IThreadChecker {
 
     private var threadChecker: IThreadChecker
     init {

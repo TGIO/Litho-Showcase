@@ -2,11 +2,11 @@ package com.github.tgio.uefa.ui.vm
 
 import androidx.lifecycle.MutableLiveData
 import com.github.tgio.uefa.api.MatchRepository
-import com.github.tgio.uefa.statefull.StatefulData
 import com.github.tgio.uefa.core.base.BaseViewModel
-import com.github.tgio.uefa.ui.models.MatchInfoScreenModel
+import com.github.tgio.uefa.statefull.StatefulData
 import com.github.tgio.uefa.ui.litho.LithoStyle
 import com.github.tgio.uefa.ui.litho.StyleUEFA
+import com.github.tgio.uefa.ui.models.MatchInfoScreenModel
 
 class TimelineViewModel(
     private val repository: MatchRepository

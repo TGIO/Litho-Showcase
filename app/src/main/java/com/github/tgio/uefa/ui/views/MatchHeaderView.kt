@@ -14,7 +14,9 @@ import com.github.tgio.uefa.databinding.ViewMatchHeaderBinding
 import com.github.tgio.uefa.ui.litho.LithoStyle
 
 class MatchHeaderView @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     private val binding: ViewMatchHeaderBinding = ViewMatchHeaderBinding.inflate(
@@ -29,10 +31,10 @@ class MatchHeaderView @JvmOverloads constructor(
             binding.team1Title.text = name
             binding.teamAscorer1.text = scorers.getOrNull(0)?.getColoredSpan() ?: ""
             binding.teamAscorer2.text = scorers.getOrNull(1)?.getColoredSpan() ?: ""
-            if (redCards == 1){
+            if (redCards == 1) {
                 binding.teamARedCard1.visibility = View.VISIBLE
             }
-            if (redCards == 2){
+            if (redCards == 2) {
                 binding.teamARedCard1.visibility = View.VISIBLE
                 binding.teamARedCard2.visibility = View.VISIBLE
             }
@@ -42,10 +44,10 @@ class MatchHeaderView @JvmOverloads constructor(
             binding.team2Title.text = name
             binding.teamBscorer1.text = scorers.getOrNull(0)?.getColoredSpan() ?: ""
             binding.teamBscorer2.text = scorers.getOrNull(1)?.getColoredSpan() ?: ""
-            if (redCards == 1){
+            if (redCards == 1) {
                 binding.teamBRedCard1.visibility = View.VISIBLE
             }
-            if (redCards == 2){
+            if (redCards == 2) {
                 binding.teamBRedCard1.visibility = View.VISIBLE
                 binding.teamBRedCard2.visibility = View.VISIBLE
             }

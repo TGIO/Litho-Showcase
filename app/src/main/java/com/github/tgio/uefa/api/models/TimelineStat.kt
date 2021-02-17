@@ -1,6 +1,5 @@
 package com.github.tgio.uefa.api.models
 
-
 class TimelineStat(
     val title: String,
     val teamA: Number,
