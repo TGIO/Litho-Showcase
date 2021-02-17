@@ -3,22 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
-    id 'io.gitlab.arturbosch.detekt' version '1.16.0-RC1'
 }
-
-detekt {
-    buildUponDefaultConfig = true // preconfigure defaults
-    config = rootProject.files("config/detekt/detekt.yml") // point to your custom config defining rules to run, overwriting default behavior
-    autoCorrect = true
-    reports {
-        html.enabled = false // observe findings in your browser with structure and code snippets
-        xml.enabled = false // checkstyle like format mainly for integrations like Jenkins
-        txt.enabled = false // similar to the console output, contains issue signature to manually edit baseline files
-        sarif.enabled = false // standardized SARIF format (https://sarifweb.azurewebsites.net/) to support integrations with Github Code Scanning
-    }
-}
-
-tasks.detekt.jvmTarget = "1.8"
 
 android {
     compileSdkVersion 30
@@ -66,7 +51,6 @@ android {
 }
 
 dependencies {
-    detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:1.16.0-RC1"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
