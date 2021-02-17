@@ -38,7 +38,6 @@ class TimelineViewModelTest {
         override suspend fun getMatchInfo(gameId: Int): MatchInfo = withContext(testDispatecher) {
             when(gameId) {
                 0 -> throw Exception("Match not found!")
-                
                 else -> mockDataSource.getMatchInfo(gameId)
             }
         }
