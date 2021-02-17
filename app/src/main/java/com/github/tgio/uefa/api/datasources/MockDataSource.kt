@@ -7,6 +7,7 @@ import com.github.tgio.uefa.api.models.MatchTeamInfo
 import com.github.tgio.uefa.api.models.Scorer
 import com.github.tgio.uefa.api.models.TimelineStat
 
+@Suppress("MagicNumber")
 class MockDataSource : IDataSource {
     override suspend fun getMatchInfo(gameId: Int): MatchInfo {
 //        delay(Random.nextLong(1000))
