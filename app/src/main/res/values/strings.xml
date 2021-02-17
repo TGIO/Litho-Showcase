@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">UEFA</string>
+    <string name="tab_overview">Overview</string>
+    <string name="tab_lineups">Line Ups</string>
+    <string name="tab_stats">Stats</string>
+    <string name="tab_matchinfo">Match Info</string>
+</resources>
