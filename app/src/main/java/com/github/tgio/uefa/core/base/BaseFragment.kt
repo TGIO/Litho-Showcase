@@ -3,12 +3,12 @@ package com.github.tgio.uefa.core.base
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.github.tgio.uefa.ui.models.ScreenModel
 import com.github.tgio.uefa.statefull.StatefulData
+import com.github.tgio.uefa.ui.models.ScreenModel
 
-abstract class BaseFragment<T: ScreenModel> : Fragment {
-    constructor(): super()
-    constructor(layoutId: Int): super(layoutId)
+abstract class BaseFragment<T : ScreenModel> : Fragment {
+    constructor() : super()
+    constructor(layoutId: Int) : super(layoutId)
 
     abstract val vm: BaseViewModel<T>
 

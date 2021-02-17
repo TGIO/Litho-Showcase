@@ -4,4 +4,4 @@ import com.github.tgio.uefa.api.models.MatchInfo
 
 class MatchInfoScreenModel(
     val matchInfo: MatchInfo
-): ScreenModel
+) : ScreenModel

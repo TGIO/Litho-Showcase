@@ -28,14 +28,16 @@ class MainActivity : AppCompatActivity() {
         private const val STYLE = "style"
 
         fun start(context: Context, game: Int, style: LithoStyle) {
-            context.startActivity(Intent(context, MainActivity::class.java).apply {
-                putExtras(
-                    bundleOf(
-                        GAME to game,
-                        STYLE to style
+            context.startActivity(
+                Intent(context, MainActivity::class.java).apply {
+                    putExtras(
+                        bundleOf(
+                            GAME to game,
+                            STYLE to style
+                        )
                     )
-                )
-            })
+                }
+            )
         }
     }
 
@@ -52,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         vm.state.observe(this) {
-            when(it) {
+            when (it) {
                 is StatefulData.Success -> {
                     binding.matchHeaderView.setGameData(it.data.matchInfo)
                 }

@@ -114,6 +114,5 @@ object TimelineComparisonPercentageComponentSpec {
                     )
             )
             .build()
-
     }
 }

@@ -7,10 +7,10 @@ import com.github.tgio.uefa.api.models.MatchTeamInfo
 import com.github.tgio.uefa.api.models.Scorer
 import com.github.tgio.uefa.api.models.TimelineStat
 
-class MockDataSource: IDataSource {
+class MockDataSource : IDataSource {
     override suspend fun getMatchInfo(gameId: Int): MatchInfo {
 //        delay(Random.nextLong(1000))
-        return when(gameId) {
+        return when (gameId) {
             1 -> game1()
             2 -> game2()
             else -> game3()

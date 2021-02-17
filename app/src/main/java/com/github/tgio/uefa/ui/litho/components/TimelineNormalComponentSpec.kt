@@ -25,7 +25,6 @@ import com.github.tgio.uefa.api.models.TimelineStat
 import com.github.tgio.uefa.ui.litho.LithoStyle
 import java.util.*
 
-
 @LayoutSpec
 object TimelineNormalComponentSpec {
 

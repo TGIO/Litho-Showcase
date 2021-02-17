@@ -34,4 +34,4 @@ class LithoStyle(
     val color_highlight: Int,
     val color_background: Int,
     val color_item_background: Int
-): Parcelable
+) : Parcelable
