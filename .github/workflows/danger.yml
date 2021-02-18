@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Danger
-        uses: anger/kotlin@0.7.1
+        uses: danger/kotlin@0.7.1
         with:
           args: --failOnErrors --no-publish-check
         env:
