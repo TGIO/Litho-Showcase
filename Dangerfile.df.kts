@@ -23,7 +23,7 @@ danger(args) {
 //         checkDetekt(danger)
         message("onGithub done")
 
-        AndroidLint.report("app/build/reports/lint-results.xml")
+//         AndroidLint.report("app/build/reports/lint-results.xml")
         message("androidLint done")
     }
 }
