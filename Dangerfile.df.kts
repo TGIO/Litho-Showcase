@@ -4,14 +4,14 @@ import com.gianluz.dangerkotlin.androidlint.AndroidLint
 import systems.danger.kotlin.*
 
 
-// fun checkDetekt(danger: DangerDSL) {
-//     danger.git.modifiedFiles.forEach {
-//         message("Modified file", it, 0)
-//     }
-//     danger.git.createdFiles.forEach {
-//         message("Created file", it, 0)
-//     }
-// }
+fun checkDetekt(danger: DangerDSL) {
+    danger.git.modifiedFiles.forEach {
+        message("Modified file", it, 0)
+    }
+    danger.git.createdFiles.forEach {
+        message("Created file", it, 0)
+    }
+}
 
 register plugin AndroidLint
 
@@ -20,7 +20,7 @@ danger(args) {
 
     onGitHub {
         // val github = this
-//         checkDetekt(danger)
+        checkDetekt(danger)
         message("onGithub done")
 
 //         AndroidLint.report("app/build/reports/lint-results.xml")
