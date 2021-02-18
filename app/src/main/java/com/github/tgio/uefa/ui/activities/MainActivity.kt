@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val GAME = "game"
+        
         private const val STYLE = "style"
 
         fun start(context: Context, game: Int, style: LithoStyle) {
