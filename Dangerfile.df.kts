@@ -1,7 +1,6 @@
 @file:DependsOn("com.gianluz:danger-kotlin-android-lint-plugin:0.1.0")
 
 import com.gianluz.dangerkotlin.androidlint.AndroidLint
-import com.pinterest.ktlint.KtlintCommandLine
 import systems.danger.kotlin.*
 
 
@@ -19,14 +18,13 @@ register plugin AndroidLint
 danger(args) {
     val danger = this
 
-    KtlintCommandLine().run()
     onGitHub {
         // val github = this
         checkDetekt(danger)
         message("onGithub done")
 
         danger.utils.exec("./gradlew", listOf("lint"))
-        AndroidLint.report("androidlint.xml")
+        AndroidLint.report("app/build/reports/lint-results.xml")
         message("androidLint done")
     }
 }
