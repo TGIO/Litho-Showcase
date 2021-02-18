@@ -23,7 +23,6 @@ danger(args) {
         checkDetekt(danger)
         message("onGithub done")
 
-        danger.utils.exec("./gradlew", listOf("lint"))
         AndroidLint.report("app/build/reports/lint-results.xml")
         message("androidLint done")
     }
