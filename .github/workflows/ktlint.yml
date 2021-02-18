@@ -20,4 +20,5 @@ jobs:
          with:
            android: true
            github_token: ${{ secrets.github_token }}
-           reporter: github-pr-check
+           relative: true
+           reporter: github-pr-review
