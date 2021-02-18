@@ -29,9 +29,10 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v1
+      - name: Run Lint task
+        run: ./gradlew lint
       - name: Danger
         uses: danger/kotlin@0.7.1
-        run: ./gradlew lint
         with:
           args: --failOnErrors --no-publish-check
         env:
