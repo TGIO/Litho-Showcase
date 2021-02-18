@@ -1,29 +1,43 @@
+@file:DependsOn("com.gianluz:danger-kotlin-android-lint-plugin:0.1.0")
+
+import com.gianluz.dangerkotlin.androidlint.AndroidLint
+import com.gianluz.dangerkotlin.androidlint.androidLint
 import systems.danger.kotlin.*
 
-danger(args) {
 
-    val allSourceFiles = git.modifiedFiles + git.createdFiles
-    val changelogChanged = allSourceFiles.contains("CHANGELOG.md")
-    val sourceChanges = allSourceFiles.firstOrNull { it.contains("src") }
+fun checkDetekt(danger: DangerDSL) {
+    danger.git.modifiedFiles.forEach {
+        message("Modified file", it, 0)
+    }
+}
+
+register plugin AndroidLint
+
+danger(args) {
+    val danger = this
 
     onGitHub {
-        val isTrivial = pullRequest.title.contains("#trivial")
+        val github = this
+        checkDetekt(danger)
+        message("onGithub done")
 
-        // // Changelog
-        // if (!isTrivial && !changelogChanged && sourceChanges != null) {
-        //     warn(WordUtils.capitalize("any changes to library code should be reflected in the Changelog.\n\nPlease consider adding a note there and adhere to the [Changelog Guidelines](https://github.com/Moya/contributors/blob/master/Changelog%20Guidelines.md)."))
-        // }
+        androidLint {
+            // Fail for each Fatal in a single module
+            val moduleLintFilePaths = find(
+                "app",
+                "lint-results-debug.xml",
+                "lint-results-release.xml"
+            ).toTypedArray()
 
-        // Big PR Check
-        if ((pullRequest.additions ?: 0) - (pullRequest.deletions ?: 0) > 300) {
-            warn("Big PR, try to keep changes smaller if you can")
+            parseAllDistinct(*moduleLintFilePaths).forEach {
+                if(it.severity == "Fatal")
+                    fail(
+                        "Danger lint check failed: ${it.message}",
+                        it.location.file.replace(System.getProperty("user.dir"), ""),
+                        Integer.parseInt(it.location.line)
+                    )
+            }
+            message("androidLint done")
         }
-
-        // Work in progress check
-        if (pullRequest.title.contains("WIP", false)) {
-            warn("PR is classed as Work in Progress")
-        }
-
-        message("onGitHub passed")
     }
 }
