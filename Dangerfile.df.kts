@@ -1,11 +1,8 @@
 import systems.danger.kotlin.*
 
-val ktlintCMD = "ktlint -a --color --reporter=plain?group_by_file"
-
 fun checkDetekt(danger: DangerDSL, git: Git) {
     git.modifiedFiles.forEach {
-        val cmnd = danger.utils.exec(ktlintCMD, listOf("\"${it}\""))
-        message("Modified file - ${it}; cmnd $cmnd; ktlintCMD $ktlintCMD ${"\"${it}\""}", it, 0)
+        warn("Modified file - $it", it, 0)
     }
     git.createdFiles.forEach {
         message("Created file", it, 0)
@@ -16,13 +13,11 @@ danger(args) {
     val danger = this
 
     onGitHub {
-        // val github = this
         message("onGithub done")
     }
 
     onGit {
         checkDetekt(danger, this)
-        val ktlintVersion = danger.utils.exec("ktlint --version", listOf(""))
-        message("onGit done m: ${this.modifiedFiles.size}, c: ${this.createdFiles.size}, ktlintVersion $ktlintVersion")
+        message("onGit done modifiedFiles: ${this.modifiedFiles.size}, createdFiles: ${this.createdFiles.size}, deletedFiles: ${this.deletedFiles.size}")
     }
 }
