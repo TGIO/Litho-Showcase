@@ -6,8 +6,11 @@ val ktlintCMD = "${prefix}ktlint -a --color --reporter=json?group_by_file"
 
 fun checkDetekt(danger: DangerDSL, git: Git) {
     git.modifiedFiles.forEach {
-        val cmndToRun = """${ktlintCMD} $it$sufix"""
-        val cmnd = danger.utils.exec(cmndToRun, emptyList())
+        // val cmndToRun = """${ktlintCMD} $it$sufix"""
+        // val cmnd = danger.utils.exec(cmndToRun, emptyList())
+
+        val cmnd = danger.utils.exec("""ktlint "${it}"""")
+
         if (cmnd.isNullOrEmpty()) {
             message("Modified file - ${it}")
         } else {
