@@ -16,21 +16,28 @@ config:
 processors:
   active: true
   exclude:
-  # - 'DetektProgressListener'
+    - 'DetektProgressListener'
+  # - 'KtFileCountProcessor'
+  # - 'PackageCountProcessor'
+  # - 'ClassCountProcessor'
   # - 'FunctionCountProcessor'
   # - 'PropertyCountProcessor'
-  # - 'ClassCountProcessor'
-  # - 'PackageCountProcessor'
-  # - 'KtFileCountProcessor'
+  # - 'ProjectComplexityProcessor'
+  # - 'ProjectCognitiveComplexityProcessor'
+  # - 'ProjectLLOCProcessor'
+  # - 'ProjectCLOCProcessor'
+  # - 'ProjectLOCProcessor'
+  # - 'ProjectSLOCProcessor'
+  # - 'LicenseHeaderLoaderExtension'
 
 console-reports:
   active: true
   exclude:
-    #  - 'ProjectStatisticsReport'
-    #  - 'ComplexityReport'
-    #  - 'NotificationReport'
+    - 'ProjectStatisticsReport'
+    - 'ComplexityReport'
+    - 'NotificationReport'
     #  - 'FindingsReport'
-    #  - 'FileBasedFindingsReport'
+    - 'FileBasedFindingsReport'
 
 output-reports:
   active: true
@@ -132,6 +139,8 @@ coroutines:
     active: false
   RedundantSuspendModifier:
     active: false
+  SleepInsteadOfDelay:
+    active: false
   SuspendFunWithFlowReturnType:
     active: false
 
@@ -173,22 +182,24 @@ empty-blocks:
 exceptions:
   active: true
   ExceptionRaisedInUnexpectedLocation:
-    active: false
+    active: true
     methodNames: [toString, hashCode, equals, finalize]
   InstanceOfCheckForException:
     active: false
     excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
   NotImplementedDeclaration:
     active: false
+  ObjectExtendsThrowable:
+    active: false
   PrintStackTrace:
-    active: false
+    active: true
   RethrowCaughtException:
-    active: false
+    active: true
   ReturnFromFinally:
-    active: false
+    active: true
     ignoreLabeled: false
   SwallowedException:
-    active: false
+    active: true
     ignoredExceptionTypes:
       - InterruptedException
       - NumberFormatException
@@ -196,18 +207,18 @@ exceptions:
       - MalformedURLException
     allowedExceptionNameRegex: '_|(ignore|expected).*'
   ThrowingExceptionFromFinally:
-    active: false
+    active: true
   ThrowingExceptionInMain:
     active: false
   ThrowingExceptionsWithoutMessageOrCause:
-    active: false
+    active: true
     excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
     exceptions:
       - IllegalArgumentException
       - IllegalStateException
       - IOException
   ThrowingNewInstanceOfSameException:
-    active: false
+    active: true
   TooGenericExceptionCaught:
     active: true
     excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
@@ -317,6 +328,9 @@ formatting:
     active: true
     autoCorrect: true
     indentSize: 4
+  SpacingAroundAngleBrackets:
+    active: false
+    autoCorrect: true
   SpacingAroundColon:
     active: true
     autoCorrect: true
@@ -343,6 +357,9 @@ formatting:
     autoCorrect: true
   SpacingAroundRangeOperator:
     active: true
+    autoCorrect: true
+  SpacingAroundUnaryOperator:
+    active: false
     autoCorrect: true
   SpacingBetweenDeclarationsWithAnnotations:
     active: false
@@ -398,6 +415,7 @@ naming:
     ignoreOverridden: true
   InvalidPackageDeclaration:
     active: false
+    excludes: ['*.kts']
     rootPackage: ''
   MatchingDeclarationName:
     active: true
@@ -457,12 +475,16 @@ potential-bugs:
   active: true
   Deprecation:
     active: false
+  DontDowncastCollectionTypes:
+    active: false
   DuplicateCaseInWhenExpression:
     active: true
   EqualsAlwaysReturnsTrueOrFalse:
     active: true
   EqualsWithHashCodeExist:
     active: true
+  ExitOutsideMain:
+    active: false
   ExplicitGarbageCollectionCall:
     active: true
   HasPlatformType:
@@ -472,7 +494,7 @@ potential-bugs:
     restrictToAnnotatedMethods: true
     returnValueAnnotations: ['*.CheckReturnValue', '*.CheckResult']
   ImplicitDefaultLocale:
-    active: false
+    active: true
   ImplicitUnitReturnType:
     active: false
     allowExplicitReturnType: true
@@ -499,15 +521,17 @@ potential-bugs:
   UnconditionalJumpStatementInLoop:
     active: false
   UnnecessaryNotNullOperator:
-    active: false
+    active: true
   UnnecessarySafeCall:
+    active: true
+  UnreachableCatchBlock:
     active: false
   UnreachableCode:
     active: true
   UnsafeCallOnNullableType:
     active: true
   UnsafeCast:
-    active: false
+    active: true
   UselessPostfixExpression:
     active: false
   WrongEqualsTypeParameter:
@@ -524,6 +548,9 @@ style:
     conversionFunctionPrefix: 'to'
   DataClassShouldBeImmutable:
     active: false
+  DestructuringDeclarationWithTooManyEntries:
+    active: false
+    maxDestructuringEntries: 3
   EqualsNullCall:
     active: true
   EqualsOnSignatureLine:
@@ -547,7 +574,8 @@ style:
     active: false
     methods: ['kotlin.io.println', 'kotlin.io.print']
   ForbiddenPublicDataClass:
-    active: false
+    active: true
+    excludes: ['**']
     ignorePackages: ['*.internal', '*.internal.*']
   ForbiddenVoid:
     active: false
@@ -556,12 +584,15 @@ style:
   FunctionOnlyReturningConstant:
     active: true
     ignoreOverridableFunction: true
+    ignoreActualFunction: true
     excludedFunctions: 'describeContents'
     excludeAnnotatedFunction: ['dagger.Provides']
   LibraryCodeMustSpecifyReturnType:
     active: true
+    excludes: ['**']
   LibraryEntitiesShouldNotBePublic:
-    active: false
+    active: true
+    excludes: ['**']
   LoopWithTooManyJumpStatements:
     active: true
     maxJumpCount: 1
@@ -578,6 +609,7 @@ style:
     ignoreNamedArgument: true
     ignoreEnums: false
     ignoreRanges: false
+    ignoreExtensionFunctions: true
   MandatoryBracesIfStatements:
     active: false
   MandatoryBracesLoops:
@@ -592,8 +624,10 @@ style:
     active: true
   ModifierOrder:
     active: true
-  NestedClassesVisibility:
+  MultilineLambdaItParameter:
     active: false
+  NestedClassesVisibility:
+    active: true
   NewLineAtEndOfFile:
     active: true
   NoTabs:
@@ -624,7 +658,7 @@ style:
   SafeCast:
     active: true
   SerialVersionUIDInSerializableClass:
-    active: false
+    active: true
   SpacingBetweenPackageAndImports:
     active: false
   ThrowsCount:
@@ -641,6 +675,8 @@ style:
   UnnecessaryAnnotationUseSiteTarget:
     active: false
   UnnecessaryApply:
+    active: true
+  UnnecessaryFilter:
     active: false
   UnnecessaryInheritance:
     active: true
@@ -655,7 +691,7 @@ style:
   UnusedPrivateClass:
     active: true
   UnusedPrivateMember:
-    active: false
+    active: true
     allowedNames: '(_|ignored|expected|serialVersionUID)'
   UseArrayLiteralsInAnnotations:
     active: false
@@ -673,6 +709,10 @@ style:
     active: false
   UseIfInsteadOfWhen:
     active: false
+  UseIsNullOrEmpty:
+    active: false
+  UseOrEmpty:
+    active: false
   UseRequire:
     active: false
   UseRequireNotNull:
@@ -682,7 +722,7 @@ style:
   UtilityClassWithPublicConstructor:
     active: true
   VarCouldBeVal:
-    active: false
+    active: true
   WildcardImport:
     active: true
     excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']

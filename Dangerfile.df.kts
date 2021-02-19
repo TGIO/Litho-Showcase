@@ -9,12 +9,14 @@ fun checkDetekt(danger: DangerDSL, git: Git) {
         // val cmndToRun = """${ktlintCMD} $it$sufix"""
         // val cmnd = danger.utils.exec(cmndToRun, emptyList())
 
-        val cmnd = danger.utils.exec("""ktlint "${it}"""")
+        val cmndToRun = """ktlint "$it""""
+        val cmnd = danger.utils.exec(cmndToRun)
 
         if (cmnd.isNullOrEmpty()) {
             message("Modified file - ${it}")
         } else {
             warn("Modified file - ${it}; $cmnd", it, 0)
+            message("Command $cmndToRun")
         }
     }
     git.createdFiles.forEach {

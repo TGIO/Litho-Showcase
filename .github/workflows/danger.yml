@@ -11,16 +11,6 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # Check Gradle wrapper
-  validation:
-    name: Validation
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout latest code
-        uses: actions/checkout@v2
-      - name: Validate Gradle Wrapper
-        uses: gradle/wrapper-validation-action@v1
-
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
@@ -28,29 +18,21 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: Clone repo
       - uses: actions/checkout@v1
-      - name: Cache Gradle packages
-        uses: actions/cache@v2
+      - name: ktlint
+        uses: ScaCap/action-ktlint@master
         with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-      - name: Install ktlint
-        run: brew install ktlint && ktlint --version
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
+      - name: detekt
+        uses: DominuS-RU/Detekt-Action@v1.16.0-RC1
+        with:
+          github_token: ${{ secrets.github_token }}
+          detekt_config: default-detekt-config.yml
       - name: Danger
         uses: danger/kotlin@0.7.1
         with:
           args: --failOnErrors --no-publish-check
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#      - name: Setup tmate session
-#        uses: mxschmitt/action-tmate@v3
-      - name: Cleanup Gradle Cache
-        # Remove some files from the Gradle cache, so they aren't cached by GitHub Actions.
-        # Restoring these files from a GitHub Actions cache might cause problems for future builds.
-        run: |
-          rm -f ~/.gradle/caches/modules-2/modules-2.lock
-          rm -f ~/.gradle/caches/modules-2/gc.properties
