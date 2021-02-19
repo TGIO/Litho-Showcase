@@ -1,6 +1,5 @@
 build:
-  maxIssues: 0
-  excludeCorrectable: false
+  maxIssues: 300 # If detekt is introduced to older project should be changed to higher reasonable value
   weights:
   # complexity: 2
   # LongParameterList: 1
@@ -9,56 +8,39 @@ build:
 
 config:
   validation: true
-  warningsAsErrors: false
-  # when writing own rules with new properties, exclude the property path e.g.: 'my_rule_set,.*>.*>[my_property]'
-  excludes: ''
+  # when writing own rules with new properties, exclude the property path e.g.: "my_rule_set,.*>.*>[my_property]"
+  excludes: ""
 
 processors:
   active: true
   exclude:
-    - 'DetektProgressListener'
-  # - 'KtFileCountProcessor'
-  # - 'PackageCountProcessor'
-  # - 'ClassCountProcessor'
+  # - 'DetektProgressListener'
   # - 'FunctionCountProcessor'
   # - 'PropertyCountProcessor'
-  # - 'ProjectComplexityProcessor'
-  # - 'ProjectCognitiveComplexityProcessor'
-  # - 'ProjectLLOCProcessor'
-  # - 'ProjectCLOCProcessor'
-  # - 'ProjectLOCProcessor'
-  # - 'ProjectSLOCProcessor'
-  # - 'LicenseHeaderLoaderExtension'
+  # - 'ClassCountProcessor'
+  # - 'PackageCountProcessor'
+  # - 'KtFileCountProcessor'
 
 console-reports:
   active: true
   exclude:
-    - 'ProjectStatisticsReport'
-    - 'ComplexityReport'
-    - 'NotificationReport'
+    #  - 'ProjectStatisticsReport'
+    #  - 'ComplexityReport'
+    #  - 'NotificationReport'
     #  - 'FindingsReport'
     - 'FileBasedFindingsReport'
-
-output-reports:
-  active: true
-  exclude:
-  # - 'TxtOutputReport'
-  # - 'XmlOutputReport'
-  # - 'HtmlOutputReport'
+  #  - 'BuildFailureReport'
 
 comments:
   active: true
-  excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
-  AbsentOrWrongFileLicense:
-    active: false
-    licenseTemplateFile: 'license.template'
+  excludes: "**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
   CommentOverPrivateFunction:
     active: false
   CommentOverPrivateProperty:
     active: false
   EndOfSentenceFormat:
     active: false
-    endOfSentenceFormat: '([.?!][ \t\n\r\f<])|([.?!:]$)'
+    endOfSentenceFormat: ([.?!][ \t\n\r\f<])|([.?!:]$)
   UndocumentedPublicClass:
     active: false
     searchInNestedClass: true
@@ -76,20 +58,19 @@ complexity:
     active: true
     threshold: 4
   ComplexInterface:
-    active: false
+    active: true
     threshold: 10
     includeStaticDeclarations: false
-    includePrivateDeclarations: false
   ComplexMethod:
     active: true
-    threshold: 15
+    threshold: 10
     ignoreSingleWhenExpression: false
     ignoreSimpleWhenEntries: false
     ignoreNestingFunctions: false
-    nestingFunctions: [run, let, apply, with, also, use, forEach, isNotNull, ifNull]
+    nestingFunctions: run,let,apply,with,also,use,forEach,isNotNull,ifNull
   LabeledExpression:
     active: false
-    ignoredLabels: []
+    ignoredLabels: ""
   LargeClass:
     active: true
     threshold: 600
@@ -98,32 +79,24 @@ complexity:
     threshold: 60
   LongParameterList:
     active: true
-    functionThreshold: 6
-    constructorThreshold: 7
+    threshold: 6
     ignoreDefaultParameters: false
-    ignoreDataClasses: true
-    ignoreAnnotated: []
   MethodOverloading:
     active: false
     threshold: 6
-  NamedArguments:
-    active: false
-    threshold: 3
   NestedBlockDepth:
     active: true
     threshold: 4
-  ReplaceSafeCallChainWithRun:
-    active: false
   StringLiteralDuplication:
-    active: false
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
-    threshold: 3
+    active: true
+    excludes: "**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
+    threshold: 2
     ignoreAnnotation: true
     excludeStringsWithLessThan5Characters: true
     ignoreStringsRegex: '$^'
   TooManyFunctions:
     active: true
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
+    excludes: "**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
     thresholdInFiles: 11
     thresholdInClasses: 11
     thresholdInInterfaces: 11
@@ -133,22 +106,11 @@ complexity:
     ignorePrivate: false
     ignoreOverridden: false
 
-coroutines:
-  active: true
-  GlobalCoroutineUsage:
-    active: false
-  RedundantSuspendModifier:
-    active: false
-  SleepInsteadOfDelay:
-    active: false
-  SuspendFunWithFlowReturnType:
-    active: false
-
 empty-blocks:
   active: true
   EmptyCatchBlock:
     active: true
-    allowedExceptionNameRegex: '_|(ignore|expected).*'
+    allowedExceptionNameRegex: "^(_|(ignore|expected).*)"
   EmptyClassBlock:
     active: true
   EmptyDefaultConstructor:
@@ -163,7 +125,7 @@ empty-blocks:
     active: true
   EmptyFunctionBlock:
     active: true
-    ignoreOverridden: false
+    ignoreOverriddenFunctions: false
   EmptyIfBlock:
     active: true
   EmptyInitBlock:
@@ -171,8 +133,6 @@ empty-blocks:
   EmptyKtFile:
     active: true
   EmptySecondaryConstructor:
-    active: true
-  EmptyTryBlock:
     active: true
   EmptyWhenBlock:
     active: true
@@ -182,46 +142,36 @@ empty-blocks:
 exceptions:
   active: true
   ExceptionRaisedInUnexpectedLocation:
-    active: true
-    methodNames: [toString, hashCode, equals, finalize]
+    active: false
+    methodNames: 'toString,hashCode,equals,finalize'
   InstanceOfCheckForException:
     active: false
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
+    excludes: "**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
   NotImplementedDeclaration:
-    active: false
-  ObjectExtendsThrowable:
-    active: false
+    active: true
   PrintStackTrace:
     active: true
   RethrowCaughtException:
     active: true
   ReturnFromFinally:
-    active: true
+    active: false
     ignoreLabeled: false
   SwallowedException:
     active: true
-    ignoredExceptionTypes:
-      - InterruptedException
-      - NumberFormatException
-      - ParseException
-      - MalformedURLException
-    allowedExceptionNameRegex: '_|(ignore|expected).*'
+    ignoredExceptionTypes: 'InterruptedException,NumberFormatException,ParseException,MalformedURLException'
+    allowedExceptionNameRegex: "^(_|(ignore|expected).*)"
   ThrowingExceptionFromFinally:
     active: true
   ThrowingExceptionInMain:
     active: false
   ThrowingExceptionsWithoutMessageOrCause:
     active: true
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
-    exceptions:
-      - IllegalArgumentException
-      - IllegalStateException
-      - IOException
+    exceptions: 'IllegalArgumentException,IllegalStateException,IOException'
   ThrowingNewInstanceOfSameException:
     active: true
   TooGenericExceptionCaught:
     active: true
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
+    excludes: "**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
     exceptionNames:
       - ArrayIndexOutOfBoundsException
       - Error
@@ -231,7 +181,7 @@ exceptions:
       - IndexOutOfBoundsException
       - RuntimeException
       - Throwable
-    allowedExceptionNameRegex: '_|(ignore|expected).*'
+    allowedExceptionNameRegex: "^(_|(ignore|expected).*)"
   TooGenericExceptionThrown:
     active: true
     exceptionNames:
@@ -242,15 +192,9 @@ exceptions:
 
 formatting:
   active: true
-  android: false
+  android: true
   autoCorrect: true
   AnnotationOnSeparateLine:
-    active: false
-    autoCorrect: true
-  AnnotationSpacing:
-    active: false
-    autoCorrect: true
-  ArgumentListWrapping:
     active: false
     autoCorrect: true
   ChainWrapping:
@@ -259,26 +203,23 @@ formatting:
   CommentSpacing:
     active: true
     autoCorrect: true
-  EnumEntryNameCase:
-    active: false
-    autoCorrect: true
   Filename:
     active: true
   FinalNewline:
     active: true
     autoCorrect: true
-    insertFinalNewLine: true
   ImportOrdering:
+    # disabled as it can't be kept in line with kotlin autoformatter
+    # see: https://github.com/pinterest/ktlint/issues/527, https://youtrack.jetbrains.com/issue/KT-10974
     active: false
     autoCorrect: true
-    layout: 'idea'
   Indentation:
-    active: false
+    active: true
     autoCorrect: true
     indentSize: 4
-    continuationIndentSize: 4
+    continuationIndentSize: 8
   MaximumLineLength:
-    active: true
+    active: false # duplicate of MaxLineLength + wrong line reports
     maxLineLength: 120
   ModifierOrdering:
     active: true
@@ -294,9 +235,6 @@ formatting:
     autoCorrect: true
   NoEmptyClassBody:
     active: true
-    autoCorrect: true
-  NoEmptyFirstLineInMethodBlock:
-    active: false
     autoCorrect: true
   NoLineBreakAfterElse:
     active: true
@@ -320,7 +258,8 @@ formatting:
     active: true
     autoCorrect: true
   NoWildcardImports:
-    active: true
+    active: false
+    autoCorrect: false
   PackageName:
     active: true
     autoCorrect: true
@@ -328,9 +267,6 @@ formatting:
     active: true
     autoCorrect: true
     indentSize: 4
-  SpacingAroundAngleBrackets:
-    active: false
-    autoCorrect: true
   SpacingAroundColon:
     active: true
     autoCorrect: true
@@ -342,9 +278,6 @@ formatting:
     autoCorrect: true
   SpacingAroundDot:
     active: true
-    autoCorrect: true
-  SpacingAroundDoubleColon:
-    active: false
     autoCorrect: true
   SpacingAroundKeyword:
     active: true
@@ -358,15 +291,6 @@ formatting:
   SpacingAroundRangeOperator:
     active: true
     autoCorrect: true
-  SpacingAroundUnaryOperator:
-    active: false
-    autoCorrect: true
-  SpacingBetweenDeclarationsWithAnnotations:
-    active: false
-    autoCorrect: true
-  SpacingBetweenDeclarationsWithComments:
-    active: false
-    autoCorrect: true
   StringTemplate:
     active: true
     autoCorrect: true
@@ -375,84 +299,78 @@ naming:
   active: true
   ClassNaming:
     active: true
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
-    classPattern: '[A-Z][a-zA-Z0-9]*'
+    excludes: "**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
+    classPattern: '[A-Z$][a-zA-Z0-9$]*'
   ConstructorParameterNaming:
     active: true
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
+    excludes: "**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
     parameterPattern: '[a-z][A-Za-z0-9]*'
     privateParameterPattern: '[a-z][A-Za-z0-9]*'
     excludeClassPattern: '$^'
     ignoreOverridden: true
   EnumNaming:
     active: true
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
-    enumEntryPattern: '[A-Z][_a-zA-Z0-9]*'
+    excludes: "**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
+    enumEntryPattern: '^[A-Z][_a-zA-Z0-9]*'
   ForbiddenClassName:
     active: false
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
-    forbiddenName: []
+    excludes: "**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
+    forbiddenName: ''
   FunctionMaxLength:
     active: false
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
+    excludes: "**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
     maximumFunctionNameLength: 30
   FunctionMinLength:
     active: false
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
+    excludes: "**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
     minimumFunctionNameLength: 3
   FunctionNaming:
     active: true
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
-    functionPattern: '([a-z][a-zA-Z0-9]*)|(`.*`)'
+    excludes: "**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
+    functionPattern: '^([a-z$][a-zA-Z$0-9]*)|(`.*`)$'
     excludeClassPattern: '$^'
     ignoreOverridden: true
-    ignoreAnnotated: ['Composable']
   FunctionParameterNaming:
     active: true
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
+    excludes: "**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
     parameterPattern: '[a-z][A-Za-z0-9]*'
     excludeClassPattern: '$^'
-    ignoreOverridden: true
+    ignoreOverriddenFunctions: true
   InvalidPackageDeclaration:
     active: false
-    excludes: ['*.kts']
     rootPackage: ''
   MatchingDeclarationName:
     active: true
-    mustBeFirst: true
   MemberNameEqualsClassName:
     active: true
-    ignoreOverridden: true
-  NonBooleanPropertyPrefixedWithIs:
-    active: false
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
+    ignoreOverriddenFunction: true
   ObjectPropertyNaming:
     active: true
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
+    excludes: "**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
     constantPattern: '[A-Za-z][_A-Za-z0-9]*'
     propertyPattern: '[A-Za-z][_A-Za-z0-9]*'
     privatePropertyPattern: '(_)?[A-Za-z][_A-Za-z0-9]*'
   PackageNaming:
     active: true
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
-    packagePattern: '[a-z]+(\.[a-z][A-Za-z0-9]*)*'
+    excludes: "**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
+    packagePattern: '^[a-z]+(\.[a-z][A-Za-z0-9]*)*$'
   TopLevelPropertyNaming:
     active: true
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
+    excludes: "**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
     constantPattern: '[A-Z][_A-Z0-9]*'
     propertyPattern: '[A-Za-z][_A-Za-z0-9]*'
     privatePropertyPattern: '_?[A-Za-z][_A-Za-z0-9]*'
   VariableMaxLength:
     active: false
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
+    excludes: "**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
     maximumVariableNameLength: 64
   VariableMinLength:
     active: false
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
+    excludes: "**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
     minimumVariableNameLength: 1
   VariableNaming:
     active: true
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
+    excludes: "**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
     variablePattern: '[a-z][A-Za-z0-9]*'
     privateVariablePattern: '(_)?[a-z][A-Za-z0-9]*'
     excludeClassPattern: '$^'
@@ -464,40 +382,29 @@ performance:
     active: true
   ForEachOnRange:
     active: true
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
+    excludes: "**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
   SpreadOperator:
     active: true
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
+    excludes: "**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
   UnnecessaryTemporaryInstantiation:
     active: true
 
 potential-bugs:
   active: true
   Deprecation:
-    active: false
-  DontDowncastCollectionTypes:
-    active: false
+    active: true
   DuplicateCaseInWhenExpression:
     active: true
   EqualsAlwaysReturnsTrueOrFalse:
     active: true
   EqualsWithHashCodeExist:
     active: true
-  ExitOutsideMain:
-    active: false
   ExplicitGarbageCollectionCall:
     active: true
   HasPlatformType:
-    active: false
-  IgnoredReturnValue:
-    active: false
-    restrictToAnnotatedMethods: true
-    returnValueAnnotations: ['*.CheckReturnValue', '*.CheckResult']
-  ImplicitDefaultLocale:
     active: true
-  ImplicitUnitReturnType:
+  ImplicitDefaultLocale:
     active: false
-    allowExplicitReturnType: true
   InvalidRange:
     active: true
   IteratorHasNextCallsNextMethod:
@@ -506,32 +413,21 @@ potential-bugs:
     active: true
   LateinitUsage:
     active: false
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
-    excludeAnnotatedProperties: []
-    ignoreOnClassesPattern: ''
-  MapGetWithNotNullAssertionOperator:
-    active: false
+    excludes: "**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
+    excludeAnnotatedProperties: "@Inject"
+    ignoreOnClassesPattern: ""
   MissingWhenCase:
     active: true
-    allowElseExpression: true
-  NullableToStringCall:
-    active: false
   RedundantElseInWhen:
     active: true
   UnconditionalJumpStatementInLoop:
-    active: false
-  UnnecessaryNotNullOperator:
-    active: true
-  UnnecessarySafeCall:
-    active: true
-  UnreachableCatchBlock:
     active: false
   UnreachableCode:
     active: true
   UnsafeCallOnNullableType:
     active: true
   UnsafeCast:
-    active: true
+    active: false # Too many false positives reported
   UselessPostfixExpression:
     active: false
   WrongEqualsTypeParameter:
@@ -539,23 +435,16 @@ potential-bugs:
 
 style:
   active: true
-  ClassOrdering:
-    active: false
   CollapsibleIfStatements:
-    active: false
+    active: true
   DataClassContainsFunctions:
     active: false
     conversionFunctionPrefix: 'to'
   DataClassShouldBeImmutable:
     active: false
-  DestructuringDeclarationWithTooManyEntries:
-    active: false
-    maxDestructuringEntries: 3
   EqualsNullCall:
     active: true
   EqualsOnSignatureLine:
-    active: false
-  ExplicitCollectionElementAccessMethod:
     active: false
   ExplicitItLambdaParameter:
     active: false
@@ -564,56 +453,41 @@ style:
     includeLineWrapping: false
   ForbiddenComment:
     active: true
-    values: ['TODO:', 'FIXME:', 'STOPSHIP:']
-    allowedPatterns: ''
+    values: 'TODO,FIXME,STOPSHIP'
+    allowedPatterns: ""
   ForbiddenImport:
     active: false
-    imports: []
-    forbiddenPatterns: ''
-  ForbiddenMethodCall:
-    active: false
-    methods: ['kotlin.io.println', 'kotlin.io.print']
-  ForbiddenPublicDataClass:
-    active: true
-    excludes: ['**']
-    ignorePackages: ['*.internal', '*.internal.*']
+    imports: ''
+    forbiddenPatterns: ""
   ForbiddenVoid:
-    active: false
+    active: true
     ignoreOverridden: false
     ignoreUsageInGenerics: false
   FunctionOnlyReturningConstant:
     active: true
     ignoreOverridableFunction: true
-    ignoreActualFunction: true
     excludedFunctions: 'describeContents'
-    excludeAnnotatedFunction: ['dagger.Provides']
+    excludeAnnotatedFunction: "dagger.Provides"
   LibraryCodeMustSpecifyReturnType:
-    active: true
-    excludes: ['**']
-  LibraryEntitiesShouldNotBePublic:
-    active: true
-    excludes: ['**']
+    active: false
   LoopWithTooManyJumpStatements:
     active: true
     maxJumpCount: 1
   MagicNumber:
     active: true
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
-    ignoreNumbers: ['-1', '0', '1', '2']
+    excludes: "**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
+    ignoreNumbers: '-1,0,1'
     ignoreHashCodeFunction: true
     ignorePropertyDeclaration: false
     ignoreLocalVariableDeclaration: false
     ignoreConstantDeclaration: true
     ignoreCompanionObjectPropertyDeclaration: true
-    ignoreAnnotation: false
+    ignoreAnnotation: true
     ignoreNamedArgument: true
-    ignoreEnums: false
-    ignoreRanges: false
-    ignoreExtensionFunctions: true
+    ignoreEnums: true
+    ignoreRanges: true
   MandatoryBracesIfStatements:
-    active: false
-  MandatoryBracesLoops:
-    active: false
+    active: true
   MaxLineLength:
     active: true
     maxLineLength: 120
@@ -624,14 +498,12 @@ style:
     active: true
   ModifierOrder:
     active: true
-  MultilineLambdaItParameter:
-    active: false
   NestedClassesVisibility:
-    active: true
-  NewLineAtEndOfFile:
-    active: true
-  NoTabs:
     active: false
+  NewLineAtEndOfFile:
+    active: false # duplicate of FinalNewline
+  NoTabs:
+    active: true
   OptionalAbstractKeyword:
     active: true
   OptionalUnit:
@@ -644,79 +516,61 @@ style:
     active: true
   RedundantExplicitType:
     active: false
-  RedundantHigherOrderMapUsage:
-    active: false
   RedundantVisibilityModifierRule:
-    active: false
+    active: true
   ReturnCount:
     active: true
     max: 2
-    excludedFunctions: 'equals'
+    excludedFunctions: "equals"
     excludeLabeled: false
     excludeReturnFromLambda: true
-    excludeGuardClauses: false
+    excludeGuardClauses: true
   SafeCast:
     active: true
   SerialVersionUIDInSerializableClass:
-    active: true
+    active: false
   SpacingBetweenPackageAndImports:
     active: false
   ThrowsCount:
     active: true
     max: 2
   TrailingWhitespace:
-    active: false
+    active: true
   UnderscoresInNumericLiterals:
     active: false
     acceptableDecimalLength: 5
   UnnecessaryAbstractClass:
     active: true
-    excludeAnnotatedClasses: ['dagger.Module']
-  UnnecessaryAnnotationUseSiteTarget:
-    active: false
+    excludeAnnotatedClasses: "dagger.Module"
   UnnecessaryApply:
     active: true
-  UnnecessaryFilter:
-    active: false
   UnnecessaryInheritance:
     active: true
   UnnecessaryLet:
-    active: false
+    active: true
   UnnecessaryParentheses:
-    active: false
+    active: true
   UntilInsteadOfRangeTo:
     active: false
   UnusedImports:
-    active: false
+    active: true
   UnusedPrivateClass:
     active: true
   UnusedPrivateMember:
     active: true
-    allowedNames: '(_|ignored|expected|serialVersionUID)'
+    allowedNames: "(_|ignored|expected|serialVersionUID)"
   UseArrayLiteralsInAnnotations:
-    active: false
-  UseCheckNotNull:
-    active: false
+    active: true
   UseCheckOrError:
     active: false
   UseDataClass:
-    active: false
-    excludeAnnotatedClasses: []
+    active: true
+    excludeAnnotatedClasses: ""
     allowVars: false
-  UseEmptyCounterpart:
-    active: false
-  UseIfEmptyOrIfBlank:
-    active: false
   UseIfInsteadOfWhen:
-    active: false
-  UseIsNullOrEmpty:
-    active: false
-  UseOrEmpty:
-    active: false
+    active: true
   UseRequire:
-    active: false
-  UseRequireNotNull:
-    active: false
+    active: true
   UselessCallOnNotNull:
     active: true
   UtilityClassWithPublicConstructor:
@@ -724,6 +578,6 @@ style:
   VarCouldBeVal:
     active: true
   WildcardImport:
-    active: true
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
-    excludeImports: ['java.util.*', 'kotlinx.android.synthetic.*']
+    active: false
+    excludes: "**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
+    excludeImports: 'java.util.*,kotlinx.android.synthetic.*'
