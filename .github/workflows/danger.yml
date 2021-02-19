@@ -29,6 +29,8 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v1
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
       - name: Cache Gradle packages
         uses: actions/cache@v2
         with:
