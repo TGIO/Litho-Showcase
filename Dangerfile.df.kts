@@ -3,12 +3,14 @@
 import com.gianluz.dangerkotlin.androidlint.AndroidLint
 import systems.danger.kotlin.*
 
+val ktlintCMD = "ktlint -a --color --reporter=plain?group_by_file"
 
-fun checkDetekt(danger: DangerDSL) {
-    danger.git.modifiedFiles.forEach {
-        message("Modified file", it, 0)
+fun checkDetekt(danger: DangerDSL, git: Git) {
+    git.modifiedFiles.forEach {
+        val cmnd = danger.utils.exec(ktlintCMD, listOf("\"${it}\""))
+        message("Modified file - ${it}; cmnd $cmnd; ktlintCMD $ktlintCMD ${"\"${it}\""}", it, 0)
     }
-    danger.git.createdFiles.forEach {
+    git.createdFiles.forEach {
         message("Created file", it, 0)
     }
 }
@@ -20,10 +22,13 @@ danger(args) {
 
     onGitHub {
         // val github = this
-        checkDetekt(danger)
         message("onGithub done")
 
-        AndroidLint.report("app/build/reports/lint-results.xml")
+        // AndroidLint.report("app/build/reports/lint-results.xml")
         message("androidLint done")
+    }
+
+    onGit {
+        checkDetekt(danger, this)
     }
 }
