@@ -22,6 +22,7 @@ danger(args) {
 
     onGit {
         checkDetekt(danger, this)
-        message("onGit done m: ${this.modifiedFiles.size}, c: ${this.createdFiles.size}")
+        val ktlintVersion = danger.utils.exec("ktlint --version", listOf(""))
+        message("onGit done m: ${this.modifiedFiles.size}, c: ${this.createdFiles.size}, ktlintVersion $ktlintVersion")
     }
 }
