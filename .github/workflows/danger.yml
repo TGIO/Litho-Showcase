@@ -26,7 +26,7 @@ jobs:
           github_token: ${{ secrets.github_token }}
           reporter: github-pr-review
       - name: detekt
-        uses: DominuS-RU/Detekt-Action@1.15.0
+        uses: DominuS-RU/Detekt-Action@1.15.0.1
         with:
           github_token: ${{ secrets.github_token }}
           detekt_config: default-detekt-config.yml
