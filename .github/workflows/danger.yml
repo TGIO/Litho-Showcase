@@ -41,9 +41,7 @@ jobs:
       # - name: Run Lint task
       #  run: ./gradlew lint
       - name: "Install ktlint"
-        uses: nbadal/action-ktlint-setup@v1
-        with:
-            ktlint_version: '0.40.0'
+        run: brew install ktlint
       - run: ktlint --version
         shell: bash
           
