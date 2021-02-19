@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val GAME = "game"
-        private const val GAME2 = "game2k"
+        private const val GAME2 = "game233k"
 
         private const val STYLE = "style"
 
