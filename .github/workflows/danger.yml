@@ -38,12 +38,10 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
-      # - name: Run Lint task
-      #  run: ./gradlew lint
       - name: "Install ktlint"
         run: brew install ktlint
       - name: ktlint version
-      - run: ktlint --version
+        run: ktlint --version
         shell: bash
       - name: Danger
         uses: danger/kotlin@0.7.1
