@@ -45,7 +45,7 @@ jobs:
         with:
             ktlint_version: '0.40.0'
       - run: ktlint --version
-          shell: bash
+        shell: bash
           
       - name: Danger
         uses: danger/kotlin@0.7.1
