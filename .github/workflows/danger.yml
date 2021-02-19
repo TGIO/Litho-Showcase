@@ -29,8 +29,6 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v1
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
       - name: Cache Gradle packages
         uses: actions/cache@v2
         with:
@@ -48,6 +46,8 @@ jobs:
           args: --failOnErrors --no-publish-check
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
       - name: Cleanup Gradle Cache
         # Remove some files from the Gradle cache, so they aren't cached by GitHub Actions.
         # Restoring these files from a GitHub Actions cache might cause problems for future builds.
