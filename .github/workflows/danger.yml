@@ -40,16 +40,14 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
+      - name: Install ktlint
+        run: brew install ktlint && ktlint --version
       - name: Danger
         uses: danger/kotlin@0.7.1
         with:
           args: --failOnErrors --no-publish-check
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: ktlint
-        uses: le0nidas/ktlint-pr-comments@v1
-        with:
-          repotoken: ${{ secrets.GITHUB_TOKEN }}
       - name: Cleanup Gradle Cache
         # Remove some files from the Gradle cache, so they aren't cached by GitHub Actions.
         # Restoring these files from a GitHub Actions cache might cause problems for future builds.
