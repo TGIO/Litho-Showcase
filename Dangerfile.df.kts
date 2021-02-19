@@ -22,6 +22,6 @@ danger(args) {
 
     onGit {
         checkDetekt(danger, this)
-        message("onGit done")
+        message("onGit done m: ${this.modifiedFiles.size}, c: ${this.createdFiles.size}")
     }
 }
