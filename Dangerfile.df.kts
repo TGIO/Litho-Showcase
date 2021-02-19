@@ -18,10 +18,10 @@ danger(args) {
     onGitHub {
         // val github = this
         message("onGithub done")
-
     }
 
     onGit {
         checkDetekt(danger, this)
+        message("onGit done")
     }
 }
