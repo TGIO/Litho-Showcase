@@ -22,7 +22,7 @@ class Error(
 
 fun runKlint(files: Array<FilePath>): String {
     val paths = files.joinToString(prefix = q, postfix = q, separator = " ")
-    val process = Runtime.getRuntime().exec(arrayOf("/bin/bash", "-c", "$rawCmnd $paths"))
+    val process = Runtime.getRuntime().exec(arrayOf("/bin/bash", "-c", "$q$rawCmnd $paths$q"))
     process.waitFor()
     val txt = process.inputStream.bufferedReader().readText()
     return txt
