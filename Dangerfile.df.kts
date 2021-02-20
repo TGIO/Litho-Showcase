@@ -29,6 +29,7 @@ fun runKlint(files: Array<FilePath>): String {
 }
 
 fun convertStringToErrorObjects(string: String): List<Report> {
+    if (string.isEmpty()) return emptyList()
     println("convertStringToErrorObjects string = ${string}")
     return Klaxon()
         .parseArray(string) ?: emptyList()
@@ -36,6 +37,7 @@ fun convertStringToErrorObjects(string: String): List<Report> {
 
 fun checkDetekt(danger: DangerDSL, git: Git) {
     if (git.modifiedFiles.size < 0) return
+    println("checkDetekt ${git.modifiedFiles.size} modified files")
     val outputString = runKlint(git.modifiedFiles)
     val report = convertStringToErrorObjects(outputString)
 
