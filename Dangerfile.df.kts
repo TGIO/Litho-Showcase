@@ -1,49 +1,47 @@
 @file:Repository("https://jcenter.bintray.com/")
 @file:DependsOn("com.beust:klaxon:5.0.1")
 
+import com.beust.klaxon.JsonArray
 import com.beust.klaxon.Klaxon
 import systems.danger.kotlin.*
 
-val prefix = """$""""
-val sufix = """""""
+val q = "\""
 val rawCmnd = "ktlint -a --color --reporter=json"
-val ktlintCMD = "${prefix}$rawCmnd"
+
+class Report(
+    val file: String,
+    val errors: ArrayList<Error>
+)
 
 class Error(
     val line: Int,
     val column: Int,
     val message: String,
-    val rules: String
+    val rule: String
 )
 
+fun runKlint(files: Array<FilePath>): String {
+    val paths = files.joinToString(prefix = q, postfix = q, separator = " ")
+    val process = Runtime.getRuntime().exec(arrayOf("/bin/bash", "-c", "$rawCmnd $paths"))
+    process.waitFor()
+    val txt = process.inputStream.bufferedReader().readText()
+    return txt
+}
+
+fun convertStringToErrorObjects(string: String): List<Report> {
+    println("convertStringToErrorObjects string = ${string}")
+    return Klaxon()
+        .parseArray(string) ?: emptyList()
+}
+
 fun checkDetekt(danger: DangerDSL, git: Git) {
-    git.modifiedFiles.forEach { filePath ->
-        val cmndToRun = """$ktlintCMD $filePath$sufix"""
-        // val cmndToRun = rawCmnd
-        val result = danger.utils.exec(cmndToRun, emptyList())
+    val outputString = runKlint(git.modifiedFiles)
+    val report = convertStringToErrorObjects(outputString)
 
-        // val cmndToRun = """ktlint "$it""""
-        // val cmnd = danger.utils.exec(cmndToRun)
-        println("run: $rawCmnd $filePath")
-
-        if (result.isNullOrEmpty()) {
-            message("Modified file - $filePath")
-        } else {
-            Klaxon()
-                .parse<List<Error>>(result)
-                ?.let { findings ->
-                    findings.forEach {
-                        warn(it.rules, filePath, it.line)
-                    }
-                } ?: run {
-                        warn("Modified file - $filePath; $result", filePath, 0)
-                     }
-
-            message("Command $cmndToRun")
+    report.forEach { report ->
+        report.errors.forEach {
+            warn(it.message, report.file, it.line)
         }
-    }
-    git.createdFiles.forEach {
-        message("Created file", it, 0)
     }
 }
 
