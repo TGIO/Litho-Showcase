@@ -35,6 +35,7 @@ fun convertStringToErrorObjects(string: String): List<Report> {
 }
 
 fun checkDetekt(danger: DangerDSL, git: Git) {
+    if (git.modifiedFiles.size < 0) return
     val outputString = runKlint(git.modifiedFiles)
     val report = convertStringToErrorObjects(outputString)
 
