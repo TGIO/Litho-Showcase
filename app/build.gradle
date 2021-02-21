@@ -45,6 +45,8 @@ android {
         }
     }
     lintOptions {
+        htmlReport false
+        xmlReport true
         warningsAsErrors false
         abortOnError false
         ignoreTestSources true
@@ -56,6 +58,7 @@ detekt {
     config = files("${projectDir}/../config/detekt.yml")
     buildUponDefaultConfig = true
     autoCorrect = false
+    parallel = true
     reports {
         html.enabled = false // observe findings in your browser with structure and code snippets
         xml.enabled = true // checkstyle like format mainly for integrations like Jenkins
