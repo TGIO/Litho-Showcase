@@ -17,22 +17,22 @@ jobs:
     steps:
       - name: Clone repo
         uses: actions/checkout@v1
-      - name: ktlint
-        uses: ScaCap/action-ktlint@master
-        with:
-          github_token: ${{ secrets.github_token }}
-          reporter: github-pr-check
-          android: true
-          level: info
-          fail_on_error: false
-      - name: detekt
-        uses: DominuS-RU/Detekt-Action@v1.16.0-RC1
-        with:
-          github_token: ${{ secrets.github_token }}
-          detekt_config: default-detekt-config.yml
-          reviewdog_level: info
-          fail_on_error: false
-          reviewdog_filter: file
+#      - name: ktlint
+#        uses: ScaCap/action-ktlint@master
+#        with:
+#          github_token: ${{ secrets.github_token }}
+#          reporter: github-pr-check
+#          android: true
+#          level: info
+#          fail_on_error: false
+#      - name: detekt
+#        uses: DominuS-RU/Detekt-Action@v1.16.0-RC1
+#        with:
+#          github_token: ${{ secrets.github_token }}
+#          detekt_config: default-detekt-config.yml
+#          reviewdog_level: info
+#          fail_on_error: false
+#          reviewdog_filter: file
       - name: Setup ktlint
         uses: nbadal/action-ktlint-setup@v1
       - name: Danger
