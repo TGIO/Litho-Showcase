@@ -33,8 +33,13 @@ jobs:
 #          reviewdog_level: info
 #          fail_on_error: false
 #          reviewdog_filter: file
-      - name: Setup ktlint
-        run: curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.40.0/ktlint && chmod a+x ktlint && ktlint --version
+      - name: Install ktlint
+        uses: nbadal/action-ktlint-setup@v1
+        with:
+          ktlint_version: '0.40.0'
+      - name: kltint version
+      - run: ktlint --version
+        shell: bash
       - name: Danger
         uses: danger/kotlin@0.7.1
         with:
