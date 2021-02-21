@@ -37,9 +37,8 @@ jobs:
         uses: nbadal/action-ktlint-setup@v1
         with:
           ktlint_version: '0.40.0'
-      - name: kltint version
-        run: ktlint --version
-          shell: bash
+      - run: ktlint --version
+        shell: bash
       - name: Danger
         uses: danger/kotlin@0.7.1
         with:
