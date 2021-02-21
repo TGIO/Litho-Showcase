@@ -33,6 +33,8 @@ jobs:
           reviewdog_level: info
           fail_on_error: false
           reviewdog_filter: file
+      - name: Setup ktlint
+        uses: nbadal/action-ktlint-setup@v1
       - name: Danger
         uses: danger/kotlin@0.7.1
         with:
