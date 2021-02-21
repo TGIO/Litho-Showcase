@@ -11,7 +11,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -34,7 +34,7 @@ jobs:
 #          fail_on_error: false
 #          reviewdog_filter: file
       - name: Setup ktlint
-        uses: nbadal/action-ktlint-setup@v1
+        run: curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.40.0/ktlint && chmod a+x ktlint && ktlint --version
       - name: Danger
         uses: danger/kotlin@0.7.1
         with:
