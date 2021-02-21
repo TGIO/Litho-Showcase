@@ -56,6 +56,7 @@ danger(args) {
     }
 
     onGit {
+        message("Kltint version: '${danger.utils.exec("ktlint --version")}'")
         checkDetekt(danger, this)
         message(
             "onGit done modifiedFiles: ${
