@@ -19,7 +19,19 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    flavorDimensions "version"
+    productFlavors {
+        firstVariant {
+            dimension "version"
+            applicationIdSuffix ".firstVariant"
+            versionNameSuffix "-f"
+        }
+        secondVariant {
+            dimension "version"
+            applicationIdSuffix ".secondVariant"
+            versionNameSuffix "-s"
+        }
+    }
     buildFeatures {
         viewBinding true
     }
